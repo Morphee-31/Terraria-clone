@@ -19,7 +19,7 @@ sf::Vector2<float> Player::getPosition()
 //------------------------------------------------
 sf::Vector2<float> Player::getCenteredPos()
 {
-	return {player.getPosition().x + PLAYER_WIDTH / 2, player.getPosition().x + PLAYER_HEIGHT / 2};
+	return {player.getPosition().x + PLAYER_WIDTH / 2, player.getPosition().y + PLAYER_HEIGHT / 2};
 }
 //------------------------------------------------
 void Player::move( sf::Vector2<float> speed )

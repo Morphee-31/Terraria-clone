@@ -108,27 +108,27 @@ void gameLoop(sf::RenderWindow& window)
 
 		// RESET VELOCITY UNDER CERTAIN CONDITIONS
 
-		if ( velocity.x < 0 ) {
-			velocity.x += SLIDE;
-		}
-		else if (velocity.x > 0) {
+		if ( velocity.x != 0 ) {
 			velocity.x -= SLIDE;
+		}
+		else if (abs(velocity.x) < 0.01) {
+			velocity.x = 0;
 		}
 		if (climbing) {
 			velocity.y = 0;
 		}
 
 		// X MOVEMENT
-		if		(sf::Keyboard::isKeyPressed(controls.right))			velocity.x += PLAYER_SPEED;
-		else if (sf::Keyboard::isKeyPressed(controls.left))				velocity.x -= PLAYER_SPEED;
+		if  (sf::Keyboard::isKeyPressed(controls.right))	velocity.x += PLAYER_SPEED;
+		if  (sf::Keyboard::isKeyPressed(controls.left))		velocity.x -= PLAYER_SPEED;
 
 		// Y MOVEMENT
-		else if ((sf::Keyboard::isKeyPressed(controls.up) || sf::Keyboard::isKeyPressed(controls.jump)) && climbing) {
+		if ((sf::Keyboard::isKeyPressed(controls.up) || sf::Keyboard::isKeyPressed(controls.jump)) && climbing) {
 			velocity.y = -PLAYER_SPEED;
 		}		
 
-		else if (sf::Keyboard::isKeyPressed(controls.down) && climbing)	velocity.y = +PLAYER_SPEED;
-		if		(sf::Keyboard::isKeyPressed(controls.jump) && onGround) velocity.y = -PLAYER_SPEED * 1.5;
+		//else if (sf::Keyboard::isKeyPressed(controls.down) && climbing)	velocity.y = +PLAYER_SPEED;
+		//if		(sf::Keyboard::isKeyPressed(controls.jump) && onGround) velocity.y = -PLAYER_SPEED * 1.5;
 
 		// =========================
 		// ====== PHYSICS ======

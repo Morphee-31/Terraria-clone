@@ -10,5 +10,5 @@
 #include "InitGame.hpp"
 
 void PlayerCollisions(const std::vector<std::vector<TileName>>& map,
-		const sf::Vector2<float>& playerPos, sf::Vector2<float>& velocity, float& dt, bool& onGround);
+		sf::Vector2<float>& playerPos, sf::Vector2<float>& velocity, float& dt, bool& onGround);
 

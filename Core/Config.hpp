@@ -27,12 +27,12 @@ constexpr float MAP_PIXEL_HEIGHT = MAP_HEIGHT * BLOCK_SIZE;
 
 // Player
 // SHOULD REMOVE THE PLAYER_RADIUS THING, IS REALLY ABSTACTING A LOT BECAUSE -> CIRCLE WHILE POLYGON
-constexpr float PLAYER_HEIGHT = 18.0f;
-constexpr float PLAYER_WIDTH = 9.0f;
+constexpr float PLAYER_HEIGHT = 2 * BLOCK_SIZE - 2;
+constexpr float PLAYER_WIDTH = BLOCK_SIZE - 1;
 
-constexpr float PLAYER_SPEED = 150.0f;
+constexpr float PLAYER_SPEED = 30.0;
 constexpr int   PLAYER_REACH = 5 * BLOCK_SIZE;
-constexpr float SLIDE = 1.5f;
+constexpr float SLIDE = 0.35f;
 
 // MIGHT ADD A LITLLE ALGORITHM TO FIND THE HIGHEST DIRT BLOCK IN THE MIDDLE OF THE SCREEN WIDTH
 constexpr float STARTING_X = WINDOW_WIDTH / 2.0f;
