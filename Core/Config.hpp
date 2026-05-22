@@ -7,7 +7,7 @@ constexpr unsigned short WINDOW_HEIGHT = 720;
 constexpr float WINDOW_HALF_WIDTH = static_cast<float>(WINDOW_WIDTH) / 2;
 constexpr float WINDOW_HALF_HEIGHT = static_cast<float>(WINDOW_HEIGHT) / 2;
 
-constexpr unsigned short FPS = 100;
+constexpr unsigned short FPS = 60;
 constexpr const char* WINDOW_TITLE = "My Game";
 
 // UNIVERSAL

@@ -40,6 +40,7 @@ void gameLoop(sf::RenderWindow& window)
 	const Controls controls;
 
 	bool onGround = false;
+	bool jump = false;
 	bool climbing = false;
 	float terrainStrain = 1.0;
 
@@ -47,7 +48,7 @@ void gameLoop(sf::RenderWindow& window)
 		// ===== TIME =====
 		float dt = clock.restart().asSeconds();
 		bool buttonPressed = false;
-
+		jump = false;
 
 		// =========================
 		// ===== EVENTS ======
@@ -68,6 +69,9 @@ void gameLoop(sf::RenderWindow& window)
 				case Key::Enter:
 					player.setPosition({ WINDOW_WIDTH / 2.0f, 20 });
 					velocity.y = 0;
+					break;
+				case Key::Space:
+					jump = true;
 					break;
 
 				case Key::Num1:		selectedBlock = TileName::Dirt;		break;
@@ -96,49 +100,37 @@ void gameLoop(sf::RenderWindow& window)
 			breakBlocks(window, map, playerPos, player);
 		}
 
-		//-------------------------
-		// UPDATE PLAYER POSITION
-		//-------------------------
-
-		handleTerrainStrains(map, playerX, playerY, climbing, terrainStrain);
-
 		// ============================
 		// ========= INPUT =========
 		// ============================
 
 		// RESET VELOCITY UNDER CERTAIN CONDITIONS
 
-		if ( velocity.x != 0 ) {
-			velocity.x -= SLIDE;
-		}
-		else if (abs(velocity.x) < 0.01) {
-			velocity.x = 0;
-		}
+		velocity.x = 0;
 		if (climbing) {
 			velocity.y = 0;
 		}
 
 		// X MOVEMENT
-		if  (sf::Keyboard::isKeyPressed(controls.right))	velocity.x += PLAYER_SPEED;
-		if  (sf::Keyboard::isKeyPressed(controls.left))		velocity.x -= PLAYER_SPEED;
+		if (sf::Keyboard::isKeyPressed(controls.right))		velocity.x += PLAYER_SPEED;
+		if (sf::Keyboard::isKeyPressed(controls.left))		velocity.x -= PLAYER_SPEED;
 
 		// Y MOVEMENT
 		if ((sf::Keyboard::isKeyPressed(controls.up) || sf::Keyboard::isKeyPressed(controls.jump)) && climbing) {
 			velocity.y = -PLAYER_SPEED;
 		}		
-
-		//else if (sf::Keyboard::isKeyPressed(controls.down) && climbing)	velocity.y = +PLAYER_SPEED;
-		//if		(sf::Keyboard::isKeyPressed(controls.jump) && onGround) velocity.y = -PLAYER_SPEED * 1.5;
+		if (sf::Keyboard::isKeyPressed(controls.down) && climbing)	velocity.y = +PLAYER_SPEED;
+		if (jump && onGround)	velocity.y = -PLAYER_SPEED * 10;
 
 		// =========================
 		// ====== PHYSICS ======
 		// =========================
 
-		// COLLISIONS
-		PlayerCollisions(map, playerPos, velocity, dt, onGround);
-
 		if (!climbing)	velocity.y += GRAVITY * GRAVITY * dt * 10;	// GRAVITY
 
+		// COLLISIONS
+		handleTerrainStrains(map, playerX, playerY, climbing, terrainStrain);
+		PlayerCollisions(map, playerPos, velocity, dt, onGround);
 
 		// MOUVEMENT
 		player.setPosition(playerPos);
@@ -166,17 +158,17 @@ void handleTerrainStrains(std::vector<std::vector<TileName>>& map, int& playerX,
 	int bottom = playerY - 1;
 
 	// HANDLING ERRORS
-	if (playerX < 0 && playerX >= MAP_WIDTH && playerY >= MAP_HEIGHT) {
+	if (playerX < 0 || playerX >= MAP_WIDTH || playerY >= MAP_HEIGHT) {
 		return;		
 	}
 
-	if (playerY >= 0) {
+	if (playerY <= 0) {
 		switch (map[playerY][playerX]) {
 		case TileName::Water:	terrainStrain = 0.4f;	break;
 		case TileName::Lava:    terrainStrain = 0.3f;	break;
 		}
 	}
-	else if (bottom >= 0) {
+	else if (bottom <= 0) {
 		switch (map[bottom][playerX]) {
 		case TileName::Dirt:	terrainStrain = 1.0f;	break;
 		case TileName::Sand:	terrainStrain = 0.9f;	break;
