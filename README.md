@@ -38,7 +38,7 @@ using C-make or something else.
 Feel free to tell me what can I add to my game, I'll try to implement it
 
 ## Project Structure
-'''
+```
 📦 Terraria clone
 ├── 📂 Core
 │   ├── main.cpp
@@ -60,7 +60,7 @@ Feel free to tell me what can I add to my game, I'll try to implement it
 └── 📂 Utility
     ├── Utility.cpp / .hpp
     └── Colors.hpp
-'''
+```
 
 ## Personnal comment
 It is my first "big project" in C++, and my point is not really the Game itself, I only want to understand how games works under the hood.
