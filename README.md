@@ -37,6 +37,31 @@ using C-make or something else.
 
 Feel free to tell me what can I add to my game, I'll try to implement it
 
+## Project Structure
+'''
+📦 Terraria clone
+├── 📂 Core
+│   ├── main.cpp
+│   ├── InitGame.cpp / .hpp
+│   ├── Collisions.cpp / .hpp
+│   └── Config.hpp
+├── 📂 Player
+│   ├── Player.cpp
+│   └── Player.hpp
+├── 📂 Procedural_Generation
+│   ├── MapGen.cpp / .hpp
+│   ├── PerlinNoise.cpp / .hpp
+├── 📂 Rendering_Engine
+│   ├── Rendering_Engine.cpp
+│   └── Rendering_Engine.hpp
+├── 📂 World
+│   ├── Blocks.cpp / .hpp
+│   └── TileName.hpp
+└── 📂 Utility
+    ├── Utility.cpp / .hpp
+    └── Colors.hpp
+'''
+
 ## Personnal comment
 It is my first "big project" in C++, and my point is not really the Game itself, I only want to understand how games works under the hood.
 Feel free to critisize it, it might help me, and also, my point is not using C++ features just because they exist I am trying to implement 
