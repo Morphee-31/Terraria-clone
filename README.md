@@ -24,8 +24,8 @@ A type of game a bit like Terraria developped in C++ with SMFL.
 - Rendering Engine
 
 ## How to compile it
-# Doesn't actually compile, I try to fix it
 Open the folder '.sln' with Visual Studio and run the compilation process.
+You have to link the project with SFML, I might try to automate the linking but not of my reach yet, and use at least C++17 (try 20 if it doesn't work)
 In the future, I want my project to be running even if you don't have SFML, it is not my priority yet but maybe some day
 using C-make or something else.
 
